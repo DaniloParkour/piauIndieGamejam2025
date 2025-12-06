@@ -33,7 +33,7 @@ public class PlayerMoviments : MonoBehaviour
     {
         if (collision.gameObject.tag.Equals("Enemy"))
         {
-            Destroy(this.gameObject);
+            Destroy(this);
         }
     }
 }
