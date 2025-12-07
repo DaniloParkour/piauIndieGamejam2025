@@ -13,7 +13,7 @@ public class EnemyBehavior : MonoBehaviour
     {
         rigidbody = GetComponent<Rigidbody2D>();
         float novoX = Random.Range(minX, maxX);
-        transform.position = new Vector3(novoX, transform.position.y, transform.position.z);
+        //transform.position = new Vector3(novoX, transform.position.y, transform.position.z);
     }
 
     // Update is called once per frame
