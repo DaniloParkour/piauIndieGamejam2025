@@ -1,5 +1,7 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using static UnityEditor.Searcher.SearcherWindow.Alignment;
 
 public class PlayerMoviments : MonoBehaviour
 {
@@ -10,7 +12,7 @@ public class PlayerMoviments : MonoBehaviour
     public GameObject shield;
     private Rigidbody2D rigidbody;
     public bool Imortal = false;
-    private float contadorImortal = 5f;
+    public float contadorImortal = 0;
     private float imortalTime = 2f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -39,7 +41,7 @@ public class PlayerMoviments : MonoBehaviour
             if (contadorImortal <= 0)
             {
                 Imortal = true;
-                contadorImortal = 10;
+                contadorImortal = 6.999f;
                 shield.SetActive(true);
             }
         }
@@ -63,8 +65,18 @@ public class PlayerMoviments : MonoBehaviour
     {
         if (collision.gameObject.tag.Equals("Enemy") && !Imortal)
         {
-
+            rigidbody.linearVelocity = new Vector2(0, rigidbody.linearVelocityY);
+            GetComponent<BoxCollider2D>().enabled = false;
+            Destroy(GetComponent<Rigidbody2D>());
             Destroy(this);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (collider.gameObject.tag.Equals("EndGame"))
+        {
+            SceneManager.LoadScene("MainMenu");
         }
     }
 }
